@@ -1,7 +1,7 @@
 # timoschenkoaa_platform
 timoschenkoaa Platform repository
 
-HW№1 (Знакомство с K8S, основные понятия и архитектура)
+HW №1 (Знакомство с K8S, основные понятия и архитектура)
 
 В процессе сделано:
 
@@ -27,3 +27,34 @@ HW№1 (Знакомство с K8S, основные понятия и архи
 Был склонирован требуемый репозиторий, замет создан образ контейнера frontedn и помещен на Docker Hub.
 Создан манифест frontend-pod-healthy.yaml с фиксом ошибки запуска.
 Ошибка была в отсутствие описания environment variable в конфигурации манифеста.
+
+
+HW №2 Механика запуска и взаимодействия контейнеров в K8S
+
+Задание 1
+
+- запустили кластер kind из config файла;
+- создали рабочий манифест для ReplicaSet микросервиса frontend и разобрался с принципами работы контроллера ReplicaSet;
+- Из Dockerfile был собран образ контейнера paymentService и помещен в публичный Container Registry - Docker Hub;
+- созданы валидные манифесты  paymentservice-replicaset.yaml и paymentservice-deployment.yaml с тремя репликами, разворачивающими из образа версии v0.0.1 и v0.0.2;
+
+Вопрос: Руководствуясь материалами лекции опишите произошедшую ситуацию, почему обновление ReplicaSet не повлекло обновление запущенных pod?
+Ответ: ReplicaSet контроллер следит за количеством запущеных pod, описанных в манифест файле. Для обновления pod необходимо использовать Deployment контроллер
+
+Задание со ⭐ С использованием параметров maxSurge и maxUnavailable самостоятельно реализуйте два следующих сценария развертывания:
+Аналог blue-green:
+1. Развертывание трех новых pod
+2. Удаление трех старых pod
+
+Решение описано в манифесте paymentservice-deployment-bg.yaml
+
+Reverse Rolling Update:
+1. Удаление одного старого pod
+2. Создание одного нового pod
+
+Решение описано в манифесте paymentservice-deployment-reverse.yaml
+
+DaemonSet | Задание со ⭐ и ⭐⭐
+
+1. Создан манифест node-exporter-serviceaccount.yaml для развертывания ServiceAccount Node Exporter
+2. Создан манифест node-exporter-daemonset.yaml для развертывания DaemonSet с Node Exporter
