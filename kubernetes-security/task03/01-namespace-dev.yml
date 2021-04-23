@@ -1,4 +1,4 @@
 apiVersion: v1
-namespace:
+kind: Namespace
 metadata:
   name: dev
