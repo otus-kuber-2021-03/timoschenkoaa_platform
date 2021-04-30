@@ -58,7 +58,19 @@ DaemonSet | Задание со ⭐ и ⭐⭐
 
 1. Создан манифест node-exporter-serviceaccount.yaml для развертывания ServiceAccount Node Exporter
 2. Создан манифест node-exporter-daemonset.yaml для развертывания DaemonSet с Node Exporter
+
+
 ###########################################################################
 HW №3 Безопасность и управление доступом
 ###########################################################################
 - Созданы необходимые Roles, serviceAccounts, Namespaces and RoleBinding
+
+
+###########################################################################
+HW №4 Volumes, Storages, StatefulSet
+###########################################################################
+- Создан Statefulset Minio, PV, PVC стандартного класса и headless для доступа к minio извне
+- Освоены основы работы с PV и PVC 
+
+Задание со ⭐
+Соднан манифест minio-secret.yaml для содания секретов username/password типа basic-auth 
