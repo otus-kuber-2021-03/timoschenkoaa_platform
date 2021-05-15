@@ -17,6 +17,13 @@ spec: # Описание Pod
   containers: # Описание контейнеров внутри Pod
     - name: web-server # Название контейнера
       image: xka1n/web:v1.1 # Образ из которого создается контейнер
+      readinessProbe:
+        httpGet:
+          path: /index.html 
+          port: 80
+      livenessProbe:
+          tcpSocket:
+            port: 8000  
       volumeMounts:
         - name: app
           mountPath: /app      
@@ -24,3 +31,4 @@ spec: # Описание Pod
   volumes:
     - name: app
       emptyDir: {}
+

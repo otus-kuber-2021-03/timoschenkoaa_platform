@@ -74,3 +74,31 @@ HW №4 Volumes, Storages, StatefulSet
 
 Задание со ⭐
 Соднан манифест minio-secret.yaml для содания секретов username/password типа basic-auth 
+
+###########################################################################
+HW №5 Kubernetes Network
+###########################################################################
+
+Работа с тестовым веб-приложением
+Выполнено:
+
+Добавление проверок Pod
+Создание объекта Deployment
+Добавление сервисов в кластер ( ClusterIP )
+Включение режима балансировки IPVS
+В результат были написаны манифесты: web-deploy.yaml, web-svc-cip.yaml.
+
+Доступ к приложению извне кластера
+Выполнено:
+
+Установка MetalLB в Layer2-режиме
+Добавление сервиса LoadBalancer
+Установка Ingress-контроллера и прокси ingress-nginx
+Создание правил Ingress
+В результат были написаны манифесты: metallb-config.yaml, web-svc-lb.yaml, nginx-lb.yaml, web-svc-headless.yaml, web-ingress.yaml.
+
+Задание со ⭐ | DNS через MetalLB
+В результат были написаны манифесты kubedns-lb-tcp.yaml, kubedns-lb-udp.yaml
+
+Задания со ⭐ | Ingress для Dashboard
+В результат были написаны манифест dashboard-ingress.yaml
