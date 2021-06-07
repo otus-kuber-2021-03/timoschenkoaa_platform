@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-monitoring
+  labels:
+    app: nginx-monitoring
+spec:
+  selector:
+    matchLabels:
+      app: nginx-monitoring
+  replicas: 1
+  template: 
+    metadata:
+      labels:
+        app: nginx-monitoring
+    spec:
+      containers:
+        - name: web
+          image: xka1n/nginx_monitoring:v1.3
+          ports:
+          - containerPort: 8000
+
+        - name: nginx-exporter
+          image: nginx/nginx-prometheus-exporter:0.9.0
+          args: ["-nginx.scrape-uri=http://web:8000/basic_status"]
+          ports:
+          - containerPort: 9113
