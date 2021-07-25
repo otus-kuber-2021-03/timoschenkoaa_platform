@@ -1,0 +1,22 @@
+prometheus:
+  nodeSelector:
+    cloud.google.com/gke-nodepool: infra-pool
+  prometheusSpec:
+    replicas: 2
+  ingress:
+    enabled: true
+    hosts:
+      - prometheus.35.202.108.21.nip.io
+      
+grafana:
+  ingress:
+    enabled: true
+    hosts:
+    - grafana.35.202.108.21.nip.io
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: http://loki.observability:3100
+      jsonData:
+        maxLines: 1000
