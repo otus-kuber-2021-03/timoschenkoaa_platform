@@ -1,0 +1,29 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus-dashboard
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`prometheus.104.154.66.168.nip.io`) # Hostname to match
+      kind: Rule
+      services: # Service to redirect requests to
+        - name: prometheus-prometheus-oper-prometheus
+          kind: Service
+          namespace: monitoring
+          # passHostHeader: true
+          port: 9090
+          # responseForwarding:
+          #   flushInterval: 1ms
+          # scheme: https
+
+  tls:
+    certResolver: letsencrypt
+    domains:
+    - main: 104.154.66.168.nip.io
+      sans:
+      - '*.104.154.66.168.nip.io'

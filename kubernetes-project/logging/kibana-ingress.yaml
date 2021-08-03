@@ -1,0 +1,29 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kibana-dashboard
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`kibana.104.154.66.168.nip.io`) # Hostname to match
+      kind: Rule
+      services: # Service to redirect requests to
+        - name: kibana
+          kind: Service
+          namespace: kube-logging
+          # passHostHeader: true
+          port: 5601
+          # responseForwarding:
+          #   flushInterval: 1ms
+          # scheme: https
+
+  tls:
+    certResolver: letsencrypt
+    domains:
+    - main: 104.154.66.168.nip.io
+      sans:
+      - '*.104.154.66.168.nip.io'
