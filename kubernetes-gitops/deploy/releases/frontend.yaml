@@ -18,5 +18,5 @@ spec:
   values:
     image:
       repository: xka1n/frontend
-      tag: v0.0.1
+      tag: v0.0.2
 
