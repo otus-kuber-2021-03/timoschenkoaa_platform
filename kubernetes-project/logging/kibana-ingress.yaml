@@ -9,7 +9,7 @@ spec:
     - web
     - websecure
   routes:
-    - match: Host(`kibana.104.154.66.168.nip.io`) # Hostname to match
+    - match: Host(`kibana.34.132.176.130.nip.io`) # Hostname to match
       kind: Rule
       services: # Service to redirect requests to
         - name: kibana
@@ -24,6 +24,6 @@ spec:
   tls:
     certResolver: letsencrypt
     domains:
-    - main: 104.154.66.168.nip.io
+    - main: 34.132.176.130.nip.io
       sans:
-      - '*.104.154.66.168.nip.io'
+      - '*.34.132.176.130.nip.io'
