@@ -2,5 +2,5 @@ image:
   repository: xka1n/frontend
   tag: latest
 ingress:
-  host: 35.188.27.116
+  host: 34.133.137.181
 environment: develop
