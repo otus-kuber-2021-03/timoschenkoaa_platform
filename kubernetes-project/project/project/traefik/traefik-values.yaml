@@ -1,0 +1,36 @@
+# AdditionalArguments : 
+#   - "--certificatesresolvers.letsencrypt.acme.email=timoshchenkoaa@gmail.com" 
+#   - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json" 
+#   - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory" 
+#   - "--certificatesresolvers.letsencrypt.acme.tlschallenge=true"
+#   - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+#   - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+#   - "--api.insecure=true" 
+#   - "--accesslog=true" 
+#   - "--log.level=INFO"
+
+# securityContext:
+#   capabilities:
+#     drop: [ALL]
+#     add: [NET_BIND_SERVICE]
+#   readOnlyRootFilesystem: true
+#   runAsGroup: 0
+#   runAsNonRoot: false
+#   runAsUser: 0  
+
+AdditionalArguments : 
+  - "--certificatesresolvers.letsencrypt.acme.email=timoshchenkoaa@gmail.com" 
+  - "--certificatesresolvers.letsencrypt.acme.storage=/data/acme.json" 
+  - "--certificatesresolvers.letsencrypt.acme.caserver=https://acme-v02.api.letsencrypt.org/directory" 
+  - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
+  - "--certificatesResolvers.letsencrypt.acme.dnschallenge.provider=acme-dns"
+  - "--entrypoints.websecure.http.tls.domains[0].main=34.132.176.130.nip.io"
+  - "--entrypoints.websecure.http.tls.domains[0].sans=*.34.132.176.130.nip.io"
+  - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+  - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+  - "--entrypoints.websecure.address=:443"
+  - "--serversTransport.insecureSkipVerify=false"
+  - "--certificatesresolvers.myresolver.acme.dnschallenge.delaybeforecheck=0"
+  - "--api.insecure=true" 
+  - "--accesslog=true" 
+  - "--log.level=INFO"

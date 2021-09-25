@@ -1,0 +1,75 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: istio-dashboard
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`tracing.34.132.176.130.nip.io`) # Hostname to match
+      kind: Rule
+      services: # Service to redirect requests to
+        - name: tracing
+          kind: Service
+          namespace: istio-system
+          # passHostHeader: true
+          port: 80
+          # responseForwarding:
+          #   flushInterval: 1ms
+          # scheme: https
+    - match: Host(`kiali.34.132.176.130.nip.io`) # Hostname to match
+      kind: Rule
+      services: # Service to redirect requests to
+        - name: kiali
+          kind: Service
+          namespace: istio-system
+          # passHostHeader: true
+          port: 20001
+          # responseForwarding:
+          #   flushInterval: 1ms
+          # scheme: https
+    - match: Host(`istgraf.34.132.176.130.nip.io`) # Hostname to match
+      kind: Rule
+      services: # Service to redirect requests to
+        - name: grafana
+          kind: Service
+          namespace: istio-system
+          # passHostHeader: true
+          port: 3000
+          # responseForwarding:
+          #   flushInterval: 1ms
+          # scheme: https
+    - match: Host(`istprom.34.132.176.130.nip.io`) # Hostname to match
+      kind: Rule
+      services: # Service to redirect requests to
+        - name: prometheus
+          kind: Service
+          namespace: istio-system
+          # passHostHeader: true
+          port: 9090
+          # responseForwarding:
+          #   flushInterval: 1ms
+          # scheme: https
+    - match: Host(`istio.34.132.176.130.nip.io`) # Hostname to match
+      kind: Rule
+      services: # Service to redirect requests to
+        - name: istiod
+          kind: Service
+          namespace: istio-system
+          # passHostHeader: true
+          port: 443
+          # responseForwarding:
+          #   flushInterval: 1ms
+          # scheme: https                      
+                
+
+  tls:
+    secretName: grafana-cert
+    # certResolver: letsencrypt
+    # domains:
+    # - main: 104.154.66.168.nip.io
+    #   sans:
+    #   - '*.104.154.66.168.nip.io'

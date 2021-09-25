@@ -1,0 +1,6 @@
+image:
+  repository: xka1n/frontend
+  tag: latest
+ingress:
+  host: 34.133.137.181
+environment: develop

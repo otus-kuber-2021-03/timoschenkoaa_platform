@@ -1,0 +1,52 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: monitoring-dashboard
+  namespace: traefik
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - match: Host(`alertmanager.104.154.66.168.nip.io`) # Hostname to match
+      kind: Rule
+      services: # Service to redirect requests to
+        - name: prometheus-prometheus-oper-alertmanager
+          kind: Service
+          namespace: monitoring
+          # passHostHeader: true
+          port: 9093
+          # responseForwarding:
+          #   flushInterval: 1ms
+          # scheme: https
+ 
+    - match: Host(`exporter.104.154.66.168.nip.io`) # Hostname to match
+      kind: Rule
+      services: # Service to redirect requests to
+        - name: prometheus-prometheus-node-exporter
+          kind: Service
+          namespace: monitoring
+          # passHostHeader: true
+          port: 9100
+          # responseForwarding:
+          #   flushInterval: 1ms
+          # scheme: https 
+    - match: Host(`metrics.104.154.66.168.nip.io`) # Hostname to match
+      kind: Rule
+      services: # Service to redirect requests to
+        - name: prometheus-kube-state-metrics
+          kind: Service
+          namespace: monitoring
+          # passHostHeader: true
+          port: 8080
+          # responseForwarding:
+          #   flushInterval: 1ms
+          # scheme: https                   
+
+  tls:
+    certResolver: letsencrypt
+    domains:
+    - main: 104.154.66.168.nip.io
+      sans:
+      - '*.104.154.66.168.nip.io'

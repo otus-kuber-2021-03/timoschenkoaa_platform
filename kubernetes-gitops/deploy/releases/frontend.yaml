@@ -1,0 +1,27 @@
+---
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: frontend
+  namespace: microservices-demo
+  annotations:
+    fluxcd.io/ignore: "false"
+    fluxcd.io/automated: "true"
+    flux.weave.works/tag.chart-image: semver:~v0.0
+spec:
+  releaseName: frontend
+  helmVersion: v3
+  chart:
+    git: git@gitlab.com:express42/kubernetes-platform-demo/microservices-demo.git
+    ref: master
+    path: deploy/charts/frontend
+  values:
+    image:
+      repository: avtandilko/frontend
+      tag: master-3e8aad76b86ff272320ca3b7e5428514c51b57e3
+    ingress:
+      host: kubernetes-platform-demo.express42.io
+    environment: production
+
+
+
