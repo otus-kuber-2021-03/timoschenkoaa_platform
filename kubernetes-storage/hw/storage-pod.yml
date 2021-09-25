@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: storage-pod
-    image: ubuntu
+    image: busybox
     resources:
       limits:
         memory: "128Mi"
